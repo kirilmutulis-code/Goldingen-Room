@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Goldingen Room — Itāļu restorāns Kuldīgā</title>
+  <meta name="description" content="Goldingen Room — elegants itāļu restorāns vēsturiskās Kuldīgas sirdī. Autentiska virtuve, izsmalcināti vīni un neaizmirstama atmosfēra.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --burgundy: #6B1D2A;
+      --burgundy-dark: #4A1420;
+      --gold: #C9A96E;
+      --gold-light: #D4BA85;
+      --cream: #F8F3EC;
+      --ivory: #FFFCF7;
+      --olive: #5C6B4F;
+      --charcoal: #2A2424;
+      --warm-gray: #6B5F5A;
+      --text: #3A302C;
+      --text-light: #8A7D76;
+      --shadow: 0 4px 30px rgba(42, 36, 36, 0.10);
+      --shadow-lg: 0 12px 50px rgba(42, 36, 36, 0.15);
+      --radius: 4px;
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--ivory);
+      line-height: 1.7;
+      font-size: 16px;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      line-height: 1.2;
+      font-weight: 500;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+
+    a { color: var(--burgundy); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--gold); }
+
+    /* ─── Navigation ─── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    .nav.scrolled {
+      background: rgba(255, 252, 247, 0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 20px rgba(42, 36, 36, 0.08);
+      padding: 0.8rem 2.5rem;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--cream);
+      transition: color var(--transition);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav.scrolled .nav-logo { color: var(--burgundy); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(248, 243, 236, 0.85);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .nav.scrolled .nav-links a { color: var(--warm-gray); }
+    .nav-links a:hover { color: var(--gold); }
+    .nav.scrolled .nav-links a:hover { color: var(--burgundy); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--cream);
+      margin: 5px 0;
+      transition: background var(--transition);
+    }
+
+    .nav.scrolled .nav-toggle span { background: var(--burgundy); }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/hero.png') center/cover no-repeat;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(42, 36, 36, 0.50) 0%,
+        rgba(42, 36, 36, 0.30) 50%,
+        rgba(42, 36, 36, 0.60) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 2rem;
+    }
+
+    .hero-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-ornament span {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-ornament svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: rgba(248, 243, 236, 0.8);
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .hero-btn:hover {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+
+    /* ─── Sections ─── */
+    .section {
+      padding: 7rem 2.5rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--charcoal);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-light);
+      text-align: center;
+      max-width: 550px;
+      margin: 0 auto 3.5rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .ornament-line {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem auto 2rem;
+    }
+
+    /* ─── About ─── */
+    .about {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      z-index: -1;
+    }
+
+    .about-text h2 {
+      font-size: 2.4rem;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1.2rem;
+      color: var(--warm-gray);
+      font-weight: 300;
+      font-size: 0.95rem;
+    }
+
+    .about-signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--burgundy);
+      margin-top: 2rem;
+    }
+
+    /* ─── Menu Highlights ─── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .menu-card {
+      text-align: center;
+    }
+
+    .menu-card-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      aspect-ratio: 1;
+    }
+
+    .menu-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .menu-card:hover .menu-card-image img {
+      transform: scale(1.06);
+    }
+
+    .menu-card h3 {
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ─── Wine ─── */
+    .wine {
+      background: var(--burgundy);
+      color: var(--cream);
+    }
+
+    .wine .section-label { color: var(--gold-light); }
+    .wine .section-title { color: var(--cream); }
+    .wine .section-desc { color: rgba(248, 243, 236, 0.7); }
+    .wine .ornament-line { background: var(--gold-light); }
+
+    .wine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .wine-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .wine-image img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .wine-list {
+      list-style: none;
+    }
+
+    .wine-list li {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .wine-list li:last-child { border-bottom: none; }
+
+    .wine-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .wine-region {
+      font-size: 0.8rem;
+      color: rgba(248, 243, 236, 0.5);
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .wine-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    /* ─── Atmosphere ─── */
+    .atmosphere-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5rem;
+      height: 500px;
+    }
+
+    .atm-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .atm-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .atm-img:hover img {
+      transform: scale(1.04);
+    }
+
+    .atm-img:first-child {
+      grid-row: 1 / 3;
+    }
+
+    /* ─── Reservation ─── */
+    .reservation {
+      background: var(--charcoal);
+      color: var(--cream);
+      text-align: center;
+    }
+
+    .reservation .section-label { color: var(--gold); }
+    .reservation .section-title { color: var(--cream); }
+    .reservation .ornament-line { background: var(--gold); }
+
+    .reservation-info {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .res-item {
+      text-align: center;
+    }
+
+    .res-item-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 1rem;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .res-item-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .res-item h4 {
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .res-item p {
+      font-size: 0.85rem;
+      color: rgba(248, 243, 236, 0.6);
+      font-weight: 300;
+    }
+
+    .reservation-cta {
+      margin-top: 3rem;
+    }
+
+    .reservation-cta .hero-btn {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .reservation-cta .hero-btn:hover {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      background: #1a1515;
+      color: rgba(248, 243, 236, 0.4);
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-location {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(248, 243, 236, 0.5);
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(248, 243, 236, 0.5);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(201, 169, 110, 0.3);
+      margin: 1.5rem auto;
+    }
+
+    .footer p {
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+
+    /* ─── Animations ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .atmosphere-grid { height: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 252, 247, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1.5rem 2.5rem;
+        gap: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      }
+      .nav-links.open a { color: var(--text) !important; }
+      .nav-toggle { display: block; }
+
+      .about-grid,
+      .wine-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .menu-grid { grid-template-columns: 1fr; }
+
+      .atmosphere-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+      }
+
+      .atm-img { aspect-ratio: 16/9; }
+      .atm-img:first-child { grid-row: auto; }
+
+      .reservation-info { gap: 2rem; }
+      .section { padding: 5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">Goldingen Room</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Par mums</a></li>
+      <li><a href="#menu">Virtuve</a></li>
+      <li><a href="#wine">Vīni</a></li>
+      <li><a href="#atmosphere">Atmosfēra</a></li>
+      <li><a href="#reservation">Rezervēt</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-ornament">
+        <span></span>
+        <svg viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61z"/></svg>
+        <span></span>
+      </div>
+      <div class="hero-subtitle">Itāļu restorāns</div>
+      <h1>Goldingen Room</h1>
+      <p class="hero-tagline">Autentiska itāļu virtuve vēsturiskās Kuldīgas sirdī</p>
+      <a href="#reservation" class="hero-btn">Rezervēt galdiņu</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-image fade-in">
+          <img src="images/chef.png" alt="Chef preparing fresh pasta" loading="lazy">
+        </div>
+        <div class="about-text fade-in">
+          <div class="section-label">Mūsu stāsts</div>
+          <h2>Kur Itālija satiek Latviju</h2>
+          <p>Ievietojies Kuldīgas šarmantajā vecpilsētā — kādreizējā Goldingenā — mūsu restorāns atnes itāļu ēdienkartes dvēseli pie Ventas upes krastiem. Katrs ēdiens ir mīlestības vēstule Boloņas, Neapoles un Romas tradīcijām.</p>
+          <p>Mūsu šefpavārs katru dienu gatavo svaigas pastas ar rokām, izmanto labākos vietējos produktus un importē īpašas sastāvdaļas tieši no maziem itāļu ražotājiem. Rezultāts ir ēdienkarte, kas godā autentiskumu un vienlaikus svin Latvijas zemes bagātību.</p>
+          <p>Soliet pa mūsu durvīm un nonāciet vietā, kur sveču gaisma dejō akmens sienās, kur lēni vārītas ragu smarža piepilda gaisu un kur katrs vakars šķiet svētki.</p>
+          <div class="about-signature">— La dolce vita Kuldīgā</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Highlights -->
+  <section class="section" id="menu">
+    <div class="section-inner">
+      <div class="section-label fade-in">Mūsu virtuve</div>
+      <h2 class="section-title fade-in">Itāļu garša Kuldīgā</h2>
+      <div class="ornament-line fade-in"></div>
+      <p class="section-desc fade-in">Katrs šķīvis stāsta par tradīciju, meistarību un labākajām sastāvdaļām — no ar rokām gatavotām pastām līdz malkas krāsns picām.</p>
+      <div class="menu-grid">
+        <article class="menu-card fade-in">
+          <div class="menu-card-image">
+            <img src="images/pasta.png" alt="Svaigas mājas pastas" loading="lazy">
+          </div>
+          <h3>Pasta Fresca</h3>
+          <p>Katru dienu ar rokām veltnēta, izmantojot tradicionālās tehnikas. No smalkām tagliatelle līdz pildītiem ravioli — katra forma veidota ar sezonāliem pildījumiem un mājās gatavotām mērcēm.</p>
+        </article>
+        <article class="menu-card fade-in">
+          <div class="menu-card-image">
+            <img src="images/pizza.png" alt="Malkas krāsns pica" loading="lazy">
+          </div>
+          <h3>Pizza Napoletana</h3>
+          <p>Cepta mūsu malkas krāsnī 450°C temperatūrā. Mūsu picas lepnums ir 72 stundas raudzēta mīkla, San Marzano tomāti un importēta mozzarella di bufala — autentiska neapolitiešu pieredze.</p>
+        </article>
+        <article class="menu-card fade-in">
+          <div class="menu-card-image">
+            <img src="images/dessert.png" alt="Itāļu tiramisu" loading="lazy">
+          </div>
+          <h3>Dolci Italiani</h3>
+          <p>Noslēdziet savu ceļojumu ar mūsu parakstīro tiramisu, panna cotta ar meža ogām vai klasisku affogato — katrs deserts ir salds atvadu skūpsts, kas paliek atmiņā.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wine -->
+  <section class="section wine" id="wine">
+    <div class="section-inner">
+      <div class="section-label fade-in">Mūsu vīnu pagrabs</div>
+      <h2 class="section-title fade-in">Vīnu izlase</h2>
+      <div class="ornament-line fade-in"></div>
+      <p class="section-desc fade-in">Rūpīgi atlasīta itāļu vīnu kolekcija — no Toskānas ripojošajiem pakalniem līdz Sicīlijas vulkāniskajām augsnēm.</p>
+      <div class="wine-grid">
+        <div class="wine-image fade-in">
+          <img src="images/wine.png" alt="Wine cellar" loading="lazy">
+        </div>
+        <ul class="wine-list fade-in">
+          <li>
+            <div>
+              <div class="wine-name">Brunello di Montalcino</div>
+              <div class="wine-region">Toskāna, 2018</div>
+            </div>
+            <div class="wine-price">€85</div>
+          </li>
+          <li>
+            <div>
+              <div class="wine-name">Barolo DOCG</div>
+              <div class="wine-region">Pjemonta, 2017</div>
+            </div>
+            <div class="wine-price">€95</div>
+          </li>
+          <li>
+            <div>
+              <div class="wine-name">Amarone della Valpolicella</div>
+              <div class="wine-region">Venēto, 2016</div>
+            </div>
+            <div class="wine-price">€110</div>
+          </li>
+          <li>
+            <div>
+              <div class="wine-name">Chianti Classico Riserva</div>
+              <div class="wine-region">Toskāna, 2019</div>
+            </div>
+            <div class="wine-price">€55</div>
+          </li>
+          <li>
+            <div>
+              <div class="wine-name">Prosecco Superiore</div>
+              <div class="wine-region">Valdobidādene</div>
+            </div>
+            <div class="wine-price">€40</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Atmosphere -->
+  <section class="section" id="atmosphere">
+    <div class="section-inner">
+      <div class="section-label fade-in">Atmosfēra</div>
+      <h2 class="section-title fade-in">Mūsu atmosfēra</h2>
+      <div class="ornament-line fade-in"></div>
+      <p class="section-desc fade-in">Intīma vide, kur vēsturiskais šarms satiek itāļu eleganci — katrs stūrītis radīts neaizmirstamiem vakariem.</p>
+      <div class="atmosphere-grid fade-in">
+        <div class="atm-img">
+          <img src="images/terrace.png" alt="Restaurant terrace" loading="lazy">
+        </div>
+        <div class="atm-img">
+          <img src="images/hero.png" alt="Restaurant interior" loading="lazy">
+        </div>
+        <div class="atm-img">
+          <img src="images/wine.png" alt="Wine selection" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section class="section reservation" id="reservation">
+    <div class="section-inner">
+      <div class="section-label fade-in">Rezervācija</div>
+      <h2 class="section-title fade-in">Rezervējiet galdiņu</h2>
+      <div class="ornament-line fade-in"></div>
+      <div class="reservation-info fade-in">
+        <div class="res-item">
+          <div class="res-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h4>Atrašanās vieta</h4>
+          <p>Baznīcas iela 3<br>Kuldīga, LV-3301<br>Latvija</p>
+        </div>
+        <div class="res-item">
+          <div class="res-item-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h4>Darba laiks</h4>
+          <p>Pirmd. – Ceturd.: 17:00 – 23:00<br>Piektd. – Sestd.: 17:00 – 00:00<br>Svētd.: 12:00 – 22:00</p>
+        </div>
+        <div class="res-item">
+          <div class="res-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h4>Kontakti</h4>
+          <p>+371 6332 2100<br>info@goldingenroom.lv</p>
+        </div>
+      </div>
+      <div class="reservation-cta fade-in">
+        <a href="tel:+37163322100" class="hero-btn">Zvanīt, lai rezervētu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Goldingen Room</div>
+    <div class="footer-location">Kuldīga, Latvija</div>
+    <ul class="footer-links">
+      <li><a href="#about">Par mums</a></li>
+      <li><a href="#menu">Virtuve</a></li>
+      <li><a href="#wine">Vīni</a></li>
+      <li><a href="#reservation">Rezervēt</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <p>Portfēlia projekts. Viss saturs ir ilustratīvs.</p>
+  </footer>
+
+  <script>
+    // Navigation scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
